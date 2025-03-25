@@ -1,0 +1,22 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  data:
+    mongodb:
+      uri: mongodb+srv://sarthak:sarthak@cluster0.uw8ui.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: journalDB
+      auto-index: true
+logging:
+  level:
+    net:
+      engineeringdigest:
+        journalApp: DEBUG
+    org:
+      springframework:
+        data:
+          mongodb: DEBUG
+server:
+  port: 8080
+  servlet:
+    context-path: /journal
