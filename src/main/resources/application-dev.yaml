@@ -1,12 +1,54 @@
 spring:
-  output:
-    ansi:
-      enabled: ALWAYS
+  kafka:
+    bootstrap-servers: pkc-9q8rv.ap-south-2.aws.confluent.cloud:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: net.engineeringdigest.journalApp.model # Correct placement
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='E3H77YV5GBMDGWZZ' password='EHJvOgfjt+VkwhbDi13PgdTvm7avwNk4t9R7X0sAOGJq8f0iNNRJFkZQ2BT7HBWp';
+      session:
+        timeout:
+          ms: 45000
+  redis:
+    url: redis://default:M6IzuttdbFpCTz3YNzlP0l0JTqcK9UUK@redis-17090.crce182.ap-south-1-1.ec2.redns.redis-cloud.com:17090
   data:
     mongodb:
       uri: mongodb+srv://sarthak:sarthak@cluster0.uw8ui.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: journalDB
       auto-index: true
+  output:
+    ansi:
+      enabled: ALWAYS
+
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sarthaktripathy1621@gmail.com
+    password: fnox icsu qqqm rgir
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: smtp.gmail.com
+          auth: true
+          starttls:
+            enable: true
 logging:
   level:
     net:
@@ -20,3 +62,6 @@ server:
   port: 8080
   servlet:
     context-path: /journal
+weather:
+  API:
+    key: bb1c9638f41a37f32d7ced7a50f5cbe0
